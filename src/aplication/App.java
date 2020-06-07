@@ -1,7 +1,5 @@
 package aplication;
 
-
-import board.Board;
 import chess.ChessMatch;
 
 public class App {
