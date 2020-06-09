@@ -6,7 +6,7 @@ import board.Piece;
 public abstract class ChessPiece extends Piece{
 
 	private Color color;
-	private Integer moveCount;
+	//private Integer moveCount;
 	
 	
 	public ChessPiece(Board board, Color color) {
