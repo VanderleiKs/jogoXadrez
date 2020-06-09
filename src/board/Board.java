@@ -25,14 +25,14 @@ public class Board {
 	}
 	
 	public Piece piece(int row, int column) {
-		if(!positionExits(row, column)) {
+		if(!positionExists(row, column)) {
 			throw new BoardException("Position not exist!");
 		}
 		return pieces[row][column]; 
 	}
 	
 	public Piece piece(Position position) {
-		if(!positionExits(position)) {
+		if(!positionExists(position)) {
 			throw new BoardException("Position not exist");
 		}
 			
@@ -47,30 +47,38 @@ public class Board {
 		piece.position = position;
 	}
 	
-	private boolean positionExits(int row, int column) {
+	public Piece removePiece(Position position) {
+		if(!positionExists(position)) {
+			throw new BoardException("Error: Position not exist!");
+		}
+	
+		if(piece(position) == null) { 
+			return null; 
+		} else {
+			
+			Piece aux = piece(position);
+			aux.position = null;
+			pieces[position.getRow()][position.getColumn()] = null;
+			return aux;
+		}
+			
+		}
+	
+	
+	private boolean positionExists(int row, int column) {
 		return row >= 0 && row < rows && column >= 0 && column <= columns;
 	}
 	
-	public boolean positionExits(Position position) {
-		return positionExits(position.getRow(), position.getColumn());
+	public boolean positionExists(Position position) {
+		return positionExists(position.getRow(), position.getColumn());
 	}
 	
 	public boolean thereIsPiece(Position position) {
-		if(!positionExits(position)) {
+		if(!positionExists(position)) {
 			throw new BoardException("Position does not exist on the board!");
 		}
 		return piece(position) != null;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
 
