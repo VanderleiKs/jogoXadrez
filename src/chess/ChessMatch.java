@@ -19,6 +19,8 @@ public class ChessMatch {
 	
 	public ChessMatch() {
 		board = new Board(8, 8);
+		this.turn = 1;
+		this.currentPlayer = Color.WHITE;
 		initialSetup();
 	}
 	
@@ -68,6 +70,7 @@ public class ChessMatch {
 		validateSourcePosition(source);
 		validateTargetPosition(source, target);
 		Piece capturedPiece = makeMove(source, target);
+		nextTurn();
 		return (ChessPiece)capturedPiece;
 	}
 	
@@ -82,6 +85,10 @@ public class ChessMatch {
 		if(!board.thereIsPiece(position)) {
 			throw new ChessException("There is no exist piece on position source!");
 		}
+		if(currentPlayer != ((ChessPiece)board.piece(position)).getColor()) {
+			throw new ChessException("Error: The piece chosen is not yours");
+		}
+		
 		if(!board.piece(position).isThereAnyPossibleMoves()) {
 			throw new ChessException("No there possible moves!");
 		}
@@ -92,6 +99,12 @@ public class ChessMatch {
 			throw new ChessException("Not is possible move to target position!");
 		}
 	}
+	
+	private void nextTurn() {
+		turn++;
+		currentPlayer = (currentPlayer == Color.WHITE)? Color.BLACK : Color.WHITE;
+	}
+	
 	
 	private void placeNewPiece(char column, int row, ChessPiece piece) {
 		board.placePiece(piece, new ChessPosition(column, row).toPosition());	
