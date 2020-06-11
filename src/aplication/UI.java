@@ -66,23 +66,25 @@ public class UI {
 	}
 
 	public static void printBoard(ChessPiece[][] pieces) {
+		System.out.println("  a b c d e f g h");
 		for (int i = 0; i < pieces.length; i++) {
 			System.out.print((8 - i) + " ");
 			for (int j = 0; j < pieces.length; j++) {
 				printPiece(pieces[i][j], false);
 			}
-			System.out.println();
+			System.out.println(8 - i);
 		}
 		System.out.println("  a b c d e f g h");
 	}
 
 	public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
+		System.out.println("  a b c d e f g h");
 		for (int i = 0; i < pieces.length; i++) {
 			System.out.print((8 - i) + " ");
 			for (int j = 0; j < pieces.length; j++) {
 				printPiece(pieces[i][j], possibleMoves[i][j]);
 			}
-			System.out.println();
+			System.out.println(8 - i);
 		}
 		System.out.println("  a b c d e f g h");
 	}
@@ -95,7 +97,7 @@ public class UI {
 			System.out.print("-" + ANSI_RESET);
 		} else {
 			if (piece.getColor() == Color.WHITE) {
-				System.out.print(ANSI_WHITE + piece + ANSI_RESET);
+				System.out.print(ANSI_BLUE + piece + ANSI_RESET);
 			} else {
 				System.out.print(ANSI_RED + piece + ANSI_RESET);
 			}
@@ -112,7 +114,7 @@ public class UI {
 				.collect(Collectors.toList());
 
 		System.out.println("Pieces captured:");
-		System.out.print(ANSI_WHITE);
+		System.out.print(ANSI_BLUE);
 		System.out.print("White: ");
 		System.out.print(Arrays.toString(white.toArray()));
 		System.out.println(ANSI_RESET);
